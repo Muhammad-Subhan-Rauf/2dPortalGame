@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://cb7dbv5hy6xbg"]
+
+[ext_resource type="Texture2D" uid="uid://r6t3j3km3m1y" path="res://assets/sprites/exit_portal.png" id="1_5abyd"]
+[ext_resource type="Script" path="res://scripts/exit_portal.cs" id="1_t60b7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sja68"]
+atlas = ExtResource("1_5abyd")
+region = Rect2(0, 0, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7rmr"]
+atlas = ExtResource("1_5abyd")
+region = Rect2(31, 0, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcwa2"]
+atlas = ExtResource("1_5abyd")
+region = Rect2(62, 0, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amlru"]
+atlas = ExtResource("1_5abyd")
+region = Rect2(0, 32, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vmua"]
+atlas = ExtResource("1_5abyd")
+region = Rect2(31, 32, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjf6x"]
+atlas = ExtResource("1_5abyd")
+region = Rect2(62, 32, 31, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spga6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sja68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7rmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcwa2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amlru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vmua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjf6x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_am43k"]
+radius = 5.0
+height = 26.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_t60b7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_spga6")
+autoplay = "default"
+frame = 1
+frame_progress = 0.698481
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CapsuleShape2D_am43k")
+
+[node name="RayRight" type="RayCast2D" parent="."]
+position = Vector2(-1, 0)
+target_position = Vector2(12, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+position = Vector2(-1, 0)
+target_position = Vector2(-12, 0)

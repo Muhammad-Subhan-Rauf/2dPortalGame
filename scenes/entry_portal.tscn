@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://7oigscdgx82s"]
+
+[ext_resource type="Script" path="res://scripts/entry_portal.cs" id="1_as5qx"]
+[ext_resource type="Texture2D" uid="uid://cvc617lmtya50" path="res://assets/sprites/portal.png" id="1_tu0le"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgwn1"]
+atlas = ExtResource("1_tu0le")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iah3k"]
+atlas = ExtResource("1_tu0le")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg648"]
+atlas = ExtResource("1_tu0le")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odytf"]
+atlas = ExtResource("1_tu0le")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teaat"]
+atlas = ExtResource("1_tu0le")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo0bj"]
+atlas = ExtResource("1_tu0le")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5aay"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgwn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iah3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg648")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odytf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teaat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo0bj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1sgj0"]
+radius = 4.0
+height = 26.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_as5qx")
+
+[node name="Node2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_q5aay")
+autoplay = "default"
+frame_progress = 0.983048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_1sgj0")
+
+[node name="RayRight" type="RayCast2D" parent="."]
+target_position = Vector2(12, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+position = Vector2(1, 0)
+target_position = Vector2(-12, 0)
