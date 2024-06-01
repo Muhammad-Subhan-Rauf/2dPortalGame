@@ -15,7 +15,7 @@ public partial class exit_portal : Area2D
 
 	public Vector2 mouse_click_pos = new Vector2(0, 0);
 
-	public Vector2 last_know_new_pos = new Vector2(0, 0);
+	public Vector2 last_known_new_pos = new Vector2(0, 0);
 
 	public bool Portal_stuck = false;
 
@@ -174,7 +174,7 @@ public partial class exit_portal : Area2D
 		{
 			Vector2 mousePosition = GetGlobalMousePosition();
 			mouse_click_pos = mousePosition;
-			last_know_new_pos = UpdatePosition(player.Position,mouse_click_pos,100,(float)delta);
+			last_known_new_pos = UpdatePosition(player.Position,mouse_click_pos,100,(float)delta);
 			be_shot_mouse(delta);
 			fly_time = 0;
 		}
@@ -182,7 +182,7 @@ public partial class exit_portal : Area2D
 		
 		if (is_shot == true)
 		{	
-			Vector2 new_pos = last_know_new_pos;
+			Vector2 new_pos = last_known_new_pos;
 			xPos += new_pos.X;
 			yPos += new_pos.Y;
 			fly_time += 1;
@@ -204,17 +204,18 @@ public partial class exit_portal : Area2D
 		Vector2 mousePosition = GetGlobalMousePosition();
 
 
-		var player_sprite = GetParent().GetNode<Player>("Player").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		if (player_sprite.FlipH == true)
+		
+		if (mousePosition.X <= player.Position.X)
 		{
 			direction = -1;
-			xPos = player.Position.X -30;
+			xPos = player.Position.X - 30;
 		}
-		else if (player_sprite.FlipH == false)
+		else if (mousePosition.X > player.Position.X)
 		{
 			direction = 1;
-			xPos = player.Position.X +30;
+			xPos = player.Position.X + 30;
 		}
+		
 		else
 		{
 			direction = 1;
