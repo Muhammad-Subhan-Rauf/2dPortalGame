@@ -10,6 +10,17 @@ public partial class exit_portal : Area2D
 	public bool get_shot = false;
 
 	public bool right_stop = true;
+
+	public bool is_shot = false;
+
+	public Vector2 mouse_click_pos = new Vector2(0, 0);
+
+	public Vector2 last_know_new_pos = new Vector2(0, 0);
+
+	public bool Portal_stuck = false;
+
+	public int fly_time = 0;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -26,7 +37,7 @@ public partial class exit_portal : Area2D
 		{
 			if (ep != null)
 			{
-				if (direction == 0 && ep.direction == 0)
+				if (direction == 0 && ep.direction == 0 && ep.Portal_stuck == false && Portal_stuck == false)
 				{
 					if (ep.right_stop == true)
 					{
@@ -61,67 +72,196 @@ public partial class exit_portal : Area2D
 	{
 
 
+		Player player = GetNodeOrNull<Player>($"../Player");
 		var rayRight = GetNode<RayCast2D>("RayRight");
 		var rayLeft = GetNode<RayCast2D>("RayLeft");
-		
+		var rayRight2 = GetNode<RayCast2D>("RayRight2");
+		var rayLeft2 = GetNode<RayCast2D>("RayLeft2");
+		var rayDown = GetNode<RayCast2D>("RayDown");
+		var rayUp = GetNode<RayCast2D>("RayUp");
+		var rightDist = GetNode<RayCast2D>("RightDistance");
+		var leftDist = GetNode<RayCast2D>("LeftDistance");
+
+
+		if ((rayRight.IsColliding() || rayRight2.IsColliding()) && (rayLeft.IsColliding() || rayLeft2.IsColliding()))
+		{
+			
+			if (fly_time <= 4)
+			{
+				GD.Print("Exit Portal is Stuck R-L");
+				Portal_stuck = true;
+			}
+		}
+		else if ((rayRight.IsColliding() || rayRight2.IsColliding()) && (rayUp.IsColliding() || rayDown.IsColliding()))
+		{
+			if (fly_time <= 4)
+			{
+				GD.Print("Exit Portal is Stuck R-U/D");
+				Portal_stuck = true;
+			}
+		}
+		else if ((rayLeft.IsColliding() || rayLeft2.IsColliding()) && (rayLeft.IsColliding() || rayLeft2.IsColliding()))
+		{
+			if (fly_time <= 4)
+			{
+				GD.Print("Exit Portal is Stuck L-U/D");
+				Portal_stuck = true;
+			}
+		}
+		else
+		{
+			Portal_stuck = false;
+		}
+
 
 		if (rayRight.IsColliding() && rayRight.GetCollider() != GetParent().GetNode<Player>("Player"))
 		{
 			direction = 0;
 			right_stop = true;
+			is_shot = false;
+			
 		}
 		else if (rayLeft.IsColliding() && rayLeft.GetCollider() != GetParent().GetNode<Player>("Player"))
 		{
 			direction = 0;
 			right_stop = false;
+			is_shot = false;
+			
+		}
+		if (rayRight2.IsColliding() && rayRight2.GetCollider() != GetParent().GetNode<Player>("Player"))
+		{
+			direction = 0;
+			right_stop = true;
+			is_shot = false;
+			
+		}
+		else if (rayLeft2.IsColliding() && rayLeft2.GetCollider() != GetParent().GetNode<Player>("Player"))
+		{
+			direction = 0;
+			right_stop = false;
+			is_shot = false;
+			
+		}
+		if (rayDown.IsColliding() && rayDown.GetCollider() != GetParent().GetNode<Player>("Player"))
+		{
+			direction = 0;
+			right_stop = true;
+			is_shot = false;
+			
+		}
+		else if (rayUp.IsColliding() && rayUp.GetCollider() != GetParent().GetNode<Player>("Player"))
+		{
+			direction = 0;
+			right_stop = false;
+			is_shot = false;
+			
+		}
+
+		if (rightDist.IsColliding() && !leftDist.IsColliding())
+		{
+			GD.Print("Right Side hitting");
+			right_stop = true;
+		}
+		else if (!rightDist.IsColliding() && leftDist.IsColliding())
+		{
+			GD.Print("Left Side hitting");
+			right_stop = false;
 		}
 
 
-		if (Input.IsActionJustPressed("shoot_b"))
+
+		if(Input.IsActionJustPressed("right_click"))
 		{
-			be_shot(delta);
-			
+			Vector2 mousePosition = GetGlobalMousePosition();
+			mouse_click_pos = mousePosition;
+			last_know_new_pos = UpdatePosition(player.Position,mouse_click_pos,100,(float)delta);
+			be_shot_mouse(delta);
+			fly_time = 0;
+		}
+		
+		
+		if (is_shot == true)
+		{	
+			Vector2 new_pos = last_know_new_pos;
+			xPos += new_pos.X;
+			yPos += new_pos.Y;
+			fly_time += 1;
+			//xPos += 100 * (float)delta * direction;
 		}
 
 
 		
-		xPos += 100 * (float)delta * direction;
-		// Change the speed by altering the multiplier
-		// Example: Move the scene upwards
-		// yPos += 50 * delta; // Change the speed by altering the multiplier
 
-		// Update the position
 		Position = new Vector2(xPos, yPos);
 	}
 
-	public void be_shot(double delta)
+
+
+	public void be_shot_mouse(double delta)
 	{
-		var player = GetParent().GetNode<Player>("Player");
+		Player player = GetNodeOrNull<Player>($"../Player");
+
+		Vector2 mousePosition = GetGlobalMousePosition();
+
+
 		var player_sprite = GetParent().GetNode<Player>("Player").GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		if (player_sprite.FlipH == true)
 		{
-			xPos -= 10;
 			direction = -1;
+			xPos = player.Position.X -30;
 		}
 		else if (player_sprite.FlipH == false)
 		{
-			xPos += 10;
 			direction = 1;
+			xPos = player.Position.X +30;
 		}
 		else
 		{
 			direction = 1;
+			xPos = player.Position.X +30;
 		}
 		if (player == null)
 		{
 			GD.Print("Cannot Find Player");
 		}
-		xPos = player.Position.X;
+		
 		yPos = player.Position.Y - (float)15;
+
+
+
+		is_shot = true;
+		
+		// Calculate the angle from the delta vector
+		float angle = GetAngle(player.Position,mousePosition);
 
 		
 
+		// Apply rotation
+
+		Rotation = angle;
+
 	}
+
+	static float GetAngle(Vector2 point1, Vector2 point2)
+    {
+        // Calculate differences
+        float a = point1.X - point2.X;
+        float b = point1.Y - point2.Y;
+
+        // Calculate arctangent and convert to float
+        float arctanValue = (float)Math.Atan(b / a);
+        return arctanValue;
+    }
+
+	private Vector2 UpdatePosition(Vector2 current, Vector2 target, float speed, float delta)
+    {
+        // Calculate the direction vector
+        Vector2 dir = (target - current).Normalized();
+		Vector2 new_pos = current;
+		new_pos = dir*speed*delta;
+		
+		return new_pos;
+    }
 
 	public float Get_x()
 	{
