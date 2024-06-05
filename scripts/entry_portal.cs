@@ -3,6 +3,7 @@ using System;
 
 public partial class entry_portal : Area2D
 {
+	public Vector2 player_pos = new Vector2(0, 0);
 	public float xPos = -500;
 	public float yPos = -500;
 	public float direction = -1;
@@ -81,7 +82,9 @@ public partial class entry_portal : Area2D
 	public override void _Process(double delta)
 	{
 		Player player = GetNodeOrNull<Player>($"../Player");
+		player_pos = player.Position;
 		var player_sprite = player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		var fairy = player.GetNode<AnimatedSprite2D>("AnimatedSprite2D2");
 
 		var rayRight = GetNode<RayCast2D>("RayRight");
 		var rayLeft = GetNode<RayCast2D>("RayLeft");
@@ -195,14 +198,10 @@ public partial class entry_portal : Area2D
 		{
 			Vector2 mousePosition = GetGlobalMousePosition();
 			mouse_click_pos = mousePosition;
-			if (player_sprite.FlipH == true)
-			{
-				last_known_new_pos = UpdatePosition(player.Position,mouse_click_pos,100,(float)delta , -30);
-			}
-			else
-			{
-				last_known_new_pos = UpdatePosition(player.Position,mouse_click_pos,100,(float)delta , 30);
-			}
+			
+			last_known_new_pos = UpdatePosition(fairy.GlobalPosition,mouse_click_pos,100,(float)delta );
+			
+			
 			be_shot_mouse(delta);
 			fly_time = 0;
 		}
@@ -235,6 +234,14 @@ public partial class entry_portal : Area2D
 			Position = default_pos;
 			direction = 1;
 		}
+
+
+		if(Input.IsActionJustPressed("reset_portals"))
+		{
+			xPos = default_pos.X;
+			yPos = default_pos.Y;
+			Position = default_pos;
+		}
 		
 	}
 
@@ -247,48 +254,29 @@ public partial class entry_portal : Area2D
 
 		Vector2 mousePosition = GetGlobalMousePosition();
 
-
+		var fairy = player.GetNode<AnimatedSprite2D>("AnimatedSprite2D2");
 		
-		if (player_sprite.FlipH == true)
-		{
+		
 
 			
-			if (mousePosition.X <= player.Position.X - 30)
-			{
-				direction = -1;
-				xPos = player.Position.X - 30;
-			}
-			else if (mousePosition.X > player.Position.X - 30)
-			{
-				direction = 1;
-				xPos = player.Position.X - 30;
-			}
-			
-			else
-			{
-				direction = 1;
-				xPos = player.Position.X +30;
-			}
+		if (mousePosition.X <= player.Position.X - 30)
+		{
+			direction = -1;
+			xPos = fairy.GlobalPosition.X;
 		}
+		else if (mousePosition.X > player.Position.X - 30)
+		{
+			direction = 1;
+			xPos = fairy.GlobalPosition.X;
+		}
+		
 		else
 		{
-			if (mousePosition.X <= player.Position.X + 30)
-			{
-				direction = -1;
-				xPos = player.Position.X + 30;
-			}
-			else if (mousePosition.X > player.Position.X + 30)
-			{
-				direction = 1;
-				xPos = player.Position.X + 30;
-			}
-			
-			else
-			{
-				direction = 1;
-				xPos = player.Position.X +30;
-			}
+			direction = 1;
+			xPos = fairy.GlobalPosition.X;
 		}
+		
+		
 
 
 
@@ -297,8 +285,8 @@ public partial class entry_portal : Area2D
 		{
 			GD.Print("Cannot Find Player");
 		}
-		GD.Print($"{last_known_new_pos}  :  {player.Position}  :  {mousePosition}");
-		yPos = player.Position.Y - (float)25;
+		
+		yPos = fairy.GlobalPosition.Y ;
 
 
 
@@ -307,14 +295,10 @@ public partial class entry_portal : Area2D
 		// Calculate the angle from the delta vector
 		float angle;
 
-		if (player_sprite.FlipH == true)
-		{
-			angle = GetAngle(player.Position,mousePosition, -30);
-		}
-		else
-		{
-			angle = GetAngle(player.Position,mousePosition, 30);
-		}
+		
+		angle = GetAngle(fairy.GlobalPosition,mousePosition);
+		
+		
 		
 
 		
@@ -325,10 +309,10 @@ public partial class entry_portal : Area2D
 
 	}
 
-	static float GetAngle(Vector2 point1, Vector2 point2, float x_offset)
+	static float GetAngle(Vector2 point1, Vector2 point2)
     {
         // Calculate differences
-		point1.X += x_offset;
+		
         float a = point1.X - point2.X;
         float b = point1.Y - point2.Y;
 
@@ -339,10 +323,10 @@ public partial class entry_portal : Area2D
 
 
 
-	private Vector2 UpdatePosition(Vector2 current, Vector2 target, float speed, float delta, float x_offset)
+	private Vector2 UpdatePosition(Vector2 current, Vector2 target, float speed, float delta)
     {
         // Calculate the direction vector
-		current.X += x_offset;
+		
         Vector2 dir = (target - current).Normalized();
 		Vector2 new_pos = current;
 		new_pos = dir*speed*delta;

@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bft5l6oc3mq4"]
+
+[ext_resource type="Texture2D" uid="uid://dekx4jd7yowbw" path="res://assets/sprites/fairy.png" id="1_emncv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ccfg"]
+atlas = ExtResource("1_emncv")
+region = Rect2(0, 0, 360, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_liqec"]
+atlas = ExtResource("1_emncv")
+region = Rect2(360, 0, 360, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mso16"]
+atlas = ExtResource("1_emncv")
+region = Rect2(720, 0, 360, 350)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wyor2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ccfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_liqec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mso16")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7qr6e"]
+radius = 1.41421
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.0342857, 0.0342857)
+sprite_frames = SubResource("SpriteFrames_wyor2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7qr6e")

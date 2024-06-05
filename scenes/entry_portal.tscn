@@ -54,8 +54,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1sgj0"]
-radius = 4.0
-height = 26.0
+radius = 2.0
+height = 16.0
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 2
@@ -76,7 +76,7 @@ shape = SubResource("CapsuleShape2D_1sgj0")
 
 [node name="RayRight" type="RayCast2D" parent="."]
 position = Vector2(0, -7)
-target_position = Vector2(12, 0)
+target_position = Vector2(8, 0)
 
 [node name="RightDistance" type="RayCast2D" parent="."]
 position = Vector2(0, -1)
@@ -88,11 +88,11 @@ target_position = Vector2(-25, 0)
 
 [node name="RayRight2" type="RayCast2D" parent="."]
 position = Vector2(0, 7)
-target_position = Vector2(12, 0)
+target_position = Vector2(8, 0)
 
 [node name="RayUp" type="RayCast2D" parent="."]
 position = Vector2(1, -10)
-target_position = Vector2(0, -10)
+target_position = Vector2(0, -7)
 
 [node name="RayDown" type="RayCast2D" parent="."]
 position = Vector2(1, 5)
@@ -100,8 +100,8 @@ target_position = Vector2(0, 10)
 
 [node name="RayLeft" type="RayCast2D" parent="."]
 position = Vector2(1, 7)
-target_position = Vector2(-12, 0)
+target_position = Vector2(-8, 0)
 
 [node name="RayLeft2" type="RayCast2D" parent="."]
 position = Vector2(0, -7)
-target_position = Vector2(-12, 0)
+target_position = Vector2(-8, 0)
