@@ -84,6 +84,9 @@ public partial class exit_portal : Area2D
 
 
 		Player player = GetNodeOrNull<Player>($"../Player");
+		PortalFollower follower = GetNodeOrNull<PortalFollower>($"../exit/follow");
+
+
 		var player_sprite = player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		var fairy = player.GetNode<AnimatedSprite2D>("AnimatedSprite2D2");
 		
@@ -175,6 +178,7 @@ public partial class exit_portal : Area2D
 			direction = 0;
 			right_stop = true;
 			is_shot = false;
+			Rotation = follower.calc_angle();
 			
 		}
 		else if (rayUp.IsColliding() && rayUp.GetCollider() != GetParent().GetNode<Player>("Player"))
@@ -182,18 +186,31 @@ public partial class exit_portal : Area2D
 			direction = 0;
 			right_stop = false;
 			is_shot = false;
-			
+			Rotation = - follower.calc_angle();
 		}
 
 		if (rightDist.IsColliding() && !leftDist.IsColliding())
 		{
-		
+			//Rotation = (float)0;
 			right_stop = true;
+			
+			
+			Rotation = follower.calc_angle();
+			GD.Print(Rotation);
+			
+			
+			
 		}
 		else if (!rightDist.IsColliding() && leftDist.IsColliding())
 		{
-	
+			
+			Rotation = follower.calc_angle();
+			GD.Print(Rotation);
+			
 			right_stop = false;
+			
+			
+			
 		}
 
 
@@ -242,6 +259,7 @@ public partial class exit_portal : Area2D
 			xPos = default_pos.X;
 			yPos = default_pos.Y;
 			Position = default_pos;
+			direction = 1;
 		}
 	}
 

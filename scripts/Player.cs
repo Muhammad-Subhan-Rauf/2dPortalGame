@@ -4,7 +4,7 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	public const float Speed = 130.0f;
-	public const float JumpVelocity = -300.0f;
+	public const float JumpVelocity = -200.0f;
 
 	public int health = 100;
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -18,31 +18,13 @@ public partial class Player : CharacterBody2D
 
 
 
+	public bool only_once = false;
+	public Vector2 reset_pos = new Vector2(0, 0);
     public override void _Ready()
-    {
-        var animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        
-        if (animationPlayer == null)
-        {
-            GD.Print("AnimationPlayer node not found");
-        }
-        
+    {       
 
     }
-	// private void OnAnimationFinished(string animName)
-    // {
-	// 	var animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-
-    //     if (animName == "flip")
-    //     {
-    //         // Start the next animation after "MoveFairy" ends
-    //         animationPlayer.Play("idle_left");
-    //     }
-	// 	else if (animName == "flip_back")
-	// 	{
-	// 		animationPlayer.Play("idle");
-	// 	}
-    // }
+	
 
     public override void _PhysicsProcess(double delta)
 	
@@ -51,7 +33,11 @@ public partial class Player : CharacterBody2D
 
 		Vector2 currentPosition = GlobalPosition;
 
-
+		if (!only_once)
+		{
+			only_once = true;
+			reset_pos = currentPosition;
+		}
 
 
 
@@ -76,10 +62,13 @@ public partial class Player : CharacterBody2D
 		}
 		// Handle Jump.
 		if (Input.IsActionJustPressed("jump") && IsOnFloor()){
-			GD.Print(animSprite.Position);
-			GD.Print(collider.Position);
-			GD.Print(this.Position.DistanceTo(animSprite.Position));
+			
 			velocity.Y = JumpVelocity;
+		}
+		if (Input.IsActionJustPressed("reset_player") && IsOnFloor()){
+			
+			currentPosition = reset_pos;
+			GlobalPosition = reset_pos;
 		}
 
 		float direction = Input.GetAxis("move_left", "move_right");
@@ -127,7 +116,6 @@ public partial class Player : CharacterBody2D
 		}
 		
 		
-		GD.Print(fairy.GlobalPosition);
 	}
 
 	public Vector2 update_fairy(double delta, float distance, Vector2 player, Vector2 mousePos)
@@ -135,13 +123,7 @@ public partial class Player : CharacterBody2D
 	
         Vector2 direction = (mousePos - player).Normalized();
 		
-        Vector2 newPosition = player + (direction * distance)  ;
-		GD.Print("____________________________");
-		GD.Print($"Player:	{player}");
-		GD.Print($"Direction:	{direction * distance}");
-		GD.Print($"New Position:	{newPosition}");
-		GD.Print("____________________________");
-		
+        Vector2 newPosition = player + (direction * distance)  ;		
 
 		return newPosition;
 

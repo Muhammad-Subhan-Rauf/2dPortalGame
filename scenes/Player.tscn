@@ -218,8 +218,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ucgge"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fbdee"]
+radius = 4.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lwsil"]
 atlas = ExtResource("3_sesca")
@@ -263,11 +264,13 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
-shape = SubResource("CircleShape2D_ucgge")
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_fbdee")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

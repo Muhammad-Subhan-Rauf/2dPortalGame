@@ -80,18 +80,18 @@ target_position = Vector2(8, 0)
 
 [node name="RightDistance" type="RayCast2D" parent="."]
 position = Vector2(0, -1)
-target_position = Vector2(29, 0)
+target_position = Vector2(18, 0)
 
 [node name="LeftDistance" type="RayCast2D" parent="."]
 position = Vector2(0, -1)
-target_position = Vector2(-25, 0)
+target_position = Vector2(-18, 0)
 
 [node name="RayRight2" type="RayCast2D" parent="."]
 position = Vector2(0, 7)
 target_position = Vector2(8, 0)
 
 [node name="RayUp" type="RayCast2D" parent="."]
-position = Vector2(1, -10)
+position = Vector2(0, -10)
 target_position = Vector2(0, -7)
 
 [node name="RayDown" type="RayCast2D" parent="."]

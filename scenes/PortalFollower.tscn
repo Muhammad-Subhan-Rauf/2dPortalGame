@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://doiuqumpjehlv"]
+
+[ext_resource type="Script" path="res://scripts/PortalFollower.cs" id="1_iub5g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4pc8w"]
+radius = 3.0
+height = 12.0
+
+[node name="Node2D" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_iub5g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_4pc8w")
+
+[node name="rightCast" type="RayCast2D" parent="."]
+target_position = Vector2(16, 0)
+
+[node name="downCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 18)
+
+[node name="upCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, -18)
+
+[node name="leftCast" type="RayCast2D" parent="."]
+target_position = Vector2(-16, 0)
