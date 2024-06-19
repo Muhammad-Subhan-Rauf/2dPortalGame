@@ -123,7 +123,7 @@ public partial class entry_portal : Area2D
 			}
 			
 		}
-		else if ((rayRight.IsColliding() || rayRight2.IsColliding()) && (rayUp.IsColliding() || rayDown.IsColliding()))
+		else if (rayUp.IsColliding() && !rayDown.IsColliding())
 		{
 			
 			if (fly_time <= 4)
@@ -132,15 +132,7 @@ public partial class entry_portal : Area2D
 				Portal_stuck = true;
 			}
 		}
-		else if ((rayLeft.IsColliding() || rayLeft2.IsColliding()) && (rayUp.IsColliding() || rayDown.IsColliding()))
-		{
-			
-			if (fly_time <= 4)
-			{
-				
-				Portal_stuck = true;
-			}
-		}
+		
 		else
 		{
 			Portal_stuck = false;
