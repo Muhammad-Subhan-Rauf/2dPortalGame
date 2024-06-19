@@ -12,67 +12,9 @@ public partial class PortalFollower : Area2D
 	public override void _Process(double delta)
 	{
 		var por = GetParent<Area2D>();
-		
-
-		var Right = GetNode<RayCast2D>("rightCast");
-		var Left = GetNode<RayCast2D>("leftCast");
-		var Down = GetNode<RayCast2D>("downCast");
-		var Up = GetNode<RayCast2D>("upCast");
-
-		var rcol = Right.IsColliding();
-		var ucol = Up.IsColliding();
-		var lcol = Left.IsColliding();
-		var dcol = Down.IsColliding();
-
-	
-
-		if (rcol)
-		{
-			if (dcol)
-			{
-				GD.Print("D-R Corner");
-			}
-			else if (ucol)
-			{
-				GD.Print("U-R Corner");
-			}
-			else
-			{
-				GD.Print("R");
-			}
-
-		}
-		if (lcol)
-		{
-			if (dcol)
-			{
-				GD.Print("D-L Corner");
-			}
-			else if (ucol)
-			{
-				GD.Print("U-L Corner");
-			}
-			else
-			{
-				GD.Print("L");
-			}
-
-		}
-		else if (dcol)
-		{
-			GD.Print("D");
-		}
-		else if (ucol)
-		{
-			GD.Print("U");
-		}
-		else
-		{
-			GD.Print("_______________");
-		}
-
 
 		GlobalRotation = 0;
+	
 		GlobalPosition = por.Position;
 		
 		
@@ -92,6 +34,24 @@ public partial class PortalFollower : Area2D
 		var dcol = Down.IsColliding();
 
 
+		if (Right.GetCollider() == GetParent().GetNodeOrNull<Player>($"../Player"))
+		{
+			
+			rcol = false;
+		}
+		if (Left.GetCollider() == GetParent().GetNodeOrNull<Player>($"../Player"))
+		{
+			lcol = false;
+		}
+		if (Up.GetCollider() == GetParent().GetNodeOrNull<Player>($"../Player"))
+		{
+			ucol = false;
+		}
+		if (Down.GetCollider() == GetParent().GetNodeOrNull<Player>($"../Player"))
+		{
+			dcol = false;
+		}
+		
 
 		if (rcol)
 		{
@@ -133,10 +93,7 @@ public partial class PortalFollower : Area2D
 		{
 			return (float)1.55;
 		}
-		else
-		{
-			GD.Print("_______________");
-		}
+		
 	return 0;
 		
 	}

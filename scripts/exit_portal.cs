@@ -116,29 +116,18 @@ public partial class exit_portal : Area2D
 
 		if ((rayRight.IsColliding() || rayRight2.IsColliding()) && (rayLeft.IsColliding() || rayLeft2.IsColliding()))
 		{
-			
-			if (fly_time <= 4)
+			if ((rayRight.GetCollider() == player || rayRight2.GetCollider() == player) && (rayLeft.GetCollider() == player || rayLeft2.GetCollider() == player))
 			{
-			
+				GD.Print("Something");
+			}
+			else if (fly_time <= 4)
+			{
+				
 				Portal_stuck = true;
 			}
+			
 		}
-		else if ((rayRight.IsColliding() || rayRight2.IsColliding()) && (rayUp.IsColliding() || rayDown.IsColliding()))
-		{
-			if (fly_time <= 4)
-			{
 		
-				Portal_stuck = true;
-			}
-		}
-		else if ((rayLeft.IsColliding() || rayLeft2.IsColliding()) && (rayLeft.IsColliding() || rayLeft2.IsColliding()))
-		{
-			if (fly_time <= 4)
-			{
-			
-				Portal_stuck = true;
-			}
-		}
 		else
 		{
 			Portal_stuck = false;
@@ -189,23 +178,23 @@ public partial class exit_portal : Area2D
 			Rotation = - follower.calc_angle();
 		}
 
-		if (rightDist.IsColliding() && !leftDist.IsColliding())
+		if (rightDist.IsColliding() && !leftDist.IsColliding() && rightDist.GetCollider() != GetParent().GetNode<Player>("Player"))
 		{
 			//Rotation = (float)0;
 			right_stop = true;
 			
 			
 			Rotation = follower.calc_angle();
-			GD.Print(Rotation);
+		
 			
 			
 			
 		}
-		else if (!rightDist.IsColliding() && leftDist.IsColliding())
+		else if (!rightDist.IsColliding() && leftDist.IsColliding() && leftDist.GetCollider() != GetParent().GetNode<Player>("Player"))
 		{
 			
 			Rotation = follower.calc_angle();
-			GD.Print(Rotation);
+	
 			
 			right_stop = false;
 			

@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://65cvd3vlaeh2"]
+
+[ext_resource type="Script" path="res://scripts/sword.cs" id="1_xifpv"]
+[ext_resource type="Texture2D" uid="uid://bwh45tgrmnbsy" path="res://assets/sprites/swords.png" id="2_jbjc3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l3mgw"]
+radius = 2.0
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_xid8u"]
+resource_name = "attack"
+length = 0.201
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.2001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tr4rj"]
+resource_name = "attack_2"
+length = 0.201
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.2001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -3.14159, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3veej"]
+_data = {
+"attack": SubResource("Animation_xid8u"),
+"attack_2": SubResource("Animation_tr4rj")
+}
+
+[node name="Node2D" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_xifpv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -32)
+rotation = 0.750492
+texture = ExtResource("2_jbjc3")
+region_enabled = true
+region_rect = Rect2(64, 96, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -41)
+shape = SubResource("CapsuleShape2D_l3mgw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3veej")
+}

@@ -20,11 +20,12 @@ public partial class Player : CharacterBody2D
 
 	public bool only_once = false;
 	public Vector2 reset_pos = new Vector2(0, 0);
+
+
+	
     public override void _Ready()
     {       
-
     }
-	
 
     public override void _PhysicsProcess(double delta)
 	
@@ -47,7 +48,8 @@ public partial class Player : CharacterBody2D
 		var animSprite = this.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		var collider = this.GetNode<CollisionShape2D>("CollisionShape2D");
 		var fairy = this.GetNode<AnimatedSprite2D>("AnimatedSprite2D2");
-
+		
+		
 
 		
 		if (fairy == null)
@@ -65,23 +67,28 @@ public partial class Player : CharacterBody2D
 			
 			velocity.Y = JumpVelocity;
 		}
-		if (Input.IsActionJustPressed("reset_player") && IsOnFloor()){
-			
-			currentPosition = reset_pos;
-			GlobalPosition = reset_pos;
-		}
-
+		
 		float direction = Input.GetAxis("move_left", "move_right");
 	
 		if (direction < 0)
 		{
 			animSprite.FlipH = true;
+			
 		}
 		else if (direction > 0)
 		{
 			animSprite.FlipH = false;
 		
 		}
+		
+
+		
+		if (Input.IsActionJustPressed("reset_player")){
+			
+			currentPosition = reset_pos;
+			GlobalPosition = reset_pos;
+		}
+		
 		
 		
 		if (IsOnFloor()){
@@ -97,7 +104,7 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		
-		entry_portal ep = GetNodeOrNull<entry_portal>($"../entry");
+		
 		
 		MoveAndSlide();
 		

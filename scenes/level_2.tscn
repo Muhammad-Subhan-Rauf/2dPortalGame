@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxtyg7w2x1s28"]
+
+[ext_resource type="PackedScene" uid="uid://b2owsl1brrein" path="res://scenes/tilemap.tscn" id="1_1nmqt"]
+[ext_resource type="PackedScene" uid="uid://cc8npgcgjlm2k" path="res://scenes/Player.tscn" id="3_srhrn"]
+[ext_resource type="PackedScene" uid="uid://7oigscdgx82s" path="res://scenes/entry_portal.tscn" id="4_66mj3"]
+[ext_resource type="PackedScene" uid="uid://doiuqumpjehlv" path="res://scenes/PortalFollower.tscn" id="5_sk33c"]
+[ext_resource type="PackedScene" uid="uid://cb7dbv5hy6xbg" path="res://scenes/exit_portal.tscn" id="6_4rnai"]
+[ext_resource type="PackedScene" uid="uid://65cvd3vlaeh2" path="res://scenes/sword.tscn" id="7_mf6xs"]
+
+[node name="level_2" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_1nmqt")]
+layer_0/tile_data = PackedInt32Array(131074, 131080, 1, 131075, 196616, 1, 131076, 131080, 1, 131077, 196616, 1, 131078, 131080, 1, 131079, 196616, 1, 131080, 131080, 1, 131081, 196616, 1, 131086, 131080, 1, 131087, 196616, 1, 131088, 131080, 1, 131089, 196616, 1, 131090, 131080, 1, 131091, 196616, 1, 131092, 131080, 1, 131093, 196616, 1, 131094, 131080, 1, 131095, 196616, 1, 10, 65544, 2, 65546, 65544, 3, -131062, 65544, 2, -65526, 65544, 3, -131061, 131080, 2, -65525, 131080, 3, -131060, 196616, 2, -65524, 196616, 3, 11, 131080, 2, 65547, 131080, 3, 12, 196616, 2, 65548, 196616, 3, -262133, 131080, 2, -196597, 131080, 3, -262132, 196616, 2, -196596, 196616, 3, -262134, 65544, 2, -196598, 65544, 3, -262131, 262152, 2, -196595, 262152, 3, -131059, 262152, 2, -65523, 262152, 3, 13, 262152, 2, 65549, 262152, 3, 131082, 131080, 3, 131083, 196616, 3, 131084, 131080, 3, 131085, 196616, 3, -786422, 131080, 3, -786421, 196616, 3, -786420, 131080, 3, -786419, 196616, 3, -720886, 131080, 4, -720885, 196616, 4, -720884, 131080, 4, -720883, 196616, 2, -655347, 65544, 2, -589811, 65544, 3, -524275, 65544, 2, -458739, 65544, 3, -393203, 65544, 2, -327667, 65544, 3)
+
+[node name="Player" parent="." instance=ExtResource("3_srhrn")]
+position = Vector2(46, 7)
+collision_mask = 2
+
+[node name="entry" parent="." instance=ExtResource("4_66mj3")]
+position = Vector2(-363, 148)
+
+[node name="follow" parent="entry" instance=ExtResource("5_sk33c")]
+position = Vector2(-26, -5)
+
+[node name="exit" parent="." instance=ExtResource("6_4rnai")]
+position = Vector2(-309, 147)
+
+[node name="follow" parent="exit" instance=ExtResource("5_sk33c")]
+position = Vector2(34, -3)
+
+[node name="sword" parent="." instance=ExtResource("7_mf6xs")]
+position = Vector2(46, 10)
+scale = Vector2(0.7, 0.7)
