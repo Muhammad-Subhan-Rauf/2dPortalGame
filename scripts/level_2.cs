@@ -6,7 +6,7 @@ public partial class level_2 : Node2D
 	public bool door_closed1 = true;
 	public bool door_closed2 = true;
 
-	public bool key_collected = false;
+	public int key_counter = 4;
 	public bool door_opened = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,21 +26,54 @@ public partial class level_2 : Node2D
 		var door = GetNode<Area2D>("door") as door;
 		var door_collider = door.GetNode<CollisionShape2D>("CollisionShape2D");
 		var kkey = GetNodeOrNull<Area2D>("key") as key;
+		var kkey2 = GetNodeOrNull<Area2D>("key2") as key;
+		var kkey3 = GetNodeOrNull<Area2D>("key3") as key;
+		var kkey4 = GetNodeOrNull<Area2D>("key4") as key;
 
 		if (kkey != null)
 		{
 			if (kkey.key_collected)
-				{
-					if (!door_opened)
-					{
-						door.open_door();
-						door_collider.Disabled = false;
-						door.door_opened = true;
-						door_opened = true;
-					}
-					kkey.QueueFree();
-				}
+			{
+				kkey.QueueFree();
+				key_counter -= 1; 
+			}
 		}
+		if (kkey2 != null)
+		{
+			if (kkey2.key_collected)
+			{
+				kkey2.QueueFree();
+				key_counter -= 1; 
+			}
+		}
+		if (kkey3 != null)
+		{
+			if (kkey3.key_collected)
+			{
+				kkey3.QueueFree();
+				key_counter -= 1; 
+			}
+		}
+		if (kkey4 != null)
+		{
+			if (kkey4.key_collected)
+			{
+				kkey4.QueueFree();
+				key_counter -= 1; 
+			}
+		}
+
+		if (key_counter <= 0)
+		{
+			if (!door_opened)
+			{
+				door.open_door();
+				door_collider.Disabled = false;
+				door.door_opened = true;
+				door_opened = true;
+			}
+		}
+		
 	
 		if (door.player_entered == true)
 		{

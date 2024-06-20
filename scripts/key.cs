@@ -19,6 +19,7 @@ public partial class key : Area2D
 		if (body == player)
 		{
 			key_collected = true;
+			GD.Print("Key Collected");
 			
 		}
 		
