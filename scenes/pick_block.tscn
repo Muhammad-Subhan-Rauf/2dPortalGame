@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://b87vgbd3m1u47"]
+
+[ext_resource type="Script" path="res://scripts/pick_block.cs" id="1_s35vx"]
+[ext_resource type="Texture2D" uid="uid://c0rnek2x6df31" path="res://assets/block.png" id="1_uljtp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y4u6k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txx0d"]
+size = Vector2(24, 24)
+
+[node name="pick_block" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
+mass = 0.52
+physics_material_override = SubResource("PhysicsMaterial_y4u6k")
+gravity_scale = 0.324
+sleeping = true
+lock_rotation = true
+script = ExtResource("1_s35vx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-4.76837e-07, -4.76837e-07)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("1_uljtp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_txx0d")
+
+[node name="right" type="RayCast2D" parent="."]
+target_position = Vector2(19, 0)
+
+[node name="left" type="RayCast2D" parent="."]
+target_position = Vector2(-19, 0)
