@@ -17,6 +17,7 @@ public partial class level_2 : Node2D
 	public override void _Process(double delta)
 	{
 		door_functions();
+		door_and_key();
 
 
 	}
