@@ -1,8 +1,9 @@
-[gd_scene load_steps=62 format=3 uid="uid://dxtyg7w2x1s28"]
+[gd_scene load_steps=63 format=3 uid="uid://dxtyg7w2x1s28"]
 
 [ext_resource type="PackedScene" uid="uid://b2owsl1brrein" path="res://scenes/tilemap.tscn" id="1_1nmqt"]
 [ext_resource type="Script" path="res://scripts/Button.cs" id="1_65vfp"]
 [ext_resource type="Script" path="res://scripts/level_2.cs" id="1_r6syr"]
+[ext_resource type="FontFile" uid="uid://bi7tpmnk4jiad" path="res://assets/fonts/joystix monospace.otf" id="2_no6iv"]
 [ext_resource type="PackedScene" uid="uid://cc8npgcgjlm2k" path="res://scenes/Player.tscn" id="3_srhrn"]
 [ext_resource type="PackedScene" uid="uid://7oigscdgx82s" path="res://scenes/entry_portal.tscn" id="4_66mj3"]
 [ext_resource type="PackedScene" uid="uid://doiuqumpjehlv" path="res://scenes/PortalFollower.tscn" id="5_sk33c"]
@@ -325,6 +326,19 @@ animations = [{
 [node name="level_2" type="Node2D"]
 script = ExtResource("1_r6syr")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+texture_filter = 1
+texture_repeat = 3
+offset_left = -86.0
+offset_top = -75.0
+offset_right = 83.0
+offset_bottom = -27.0
+theme_override_colors/default_color = Color(0.730738, 2.75669e-05, 1.57869e-05, 1)
+theme_override_fonts/normal_font = ExtResource("2_no6iv")
+theme_override_font_sizes/normal_font_size = 13
+text = "Press G to pick up the Block"
+fit_content = true
+
 [node name="Button" type="Area2D" parent="."]
 position = Vector2(-18, 19)
 script = ExtResource("1_65vfp")
@@ -379,11 +393,13 @@ shape = SubResource("CapsuleShape2D_45a46")
 disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="door"]
-position = Vector2(0, -1)
-scale = Vector2(0.191667, 0.191667)
+position = Vector2(0, -3)
+scale = Vector2(0.191667, 0.229167)
 sprite_frames = SubResource("SpriteFrames_begby")
 animation = &"open"
 autoplay = "closed"
+frame = 11
+frame_progress = 1.0
 
 [node name="Player" parent="." instance=ExtResource("3_srhrn")]
 position = Vector2(46, 7)
