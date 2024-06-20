@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dxtyg7w2x1s28"]
+[gd_scene load_steps=62 format=3 uid="uid://dxtyg7w2x1s28"]
 
 [ext_resource type="PackedScene" uid="uid://b2owsl1brrein" path="res://scenes/tilemap.tscn" id="1_1nmqt"]
 [ext_resource type="Script" path="res://scripts/Button.cs" id="1_65vfp"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dswu5vy4edvh1" path="res://scenes/block_door.tscn" id="11_mbkq4"]
 [ext_resource type="Script" path="res://scripts/key.cs" id="13_kcn7e"]
 [ext_resource type="Texture2D" uid="uid://b6hiaxbyqyc32" path="res://assets/key.png" id="14_ddtnd"]
+[ext_resource type="PackedScene" uid="uid://b6eke774tpf6p" path="res://scenes/golem.tscn" id="17_r6kme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hyiw4"]
 size = Vector2(12, 6)
@@ -426,3 +427,18 @@ autoplay = "default"
 [node name="block_door2" parent="." instance=ExtResource("11_mbkq4")]
 position = Vector2(572, -298)
 scale = Vector2(0.5, 0.5)
+
+[node name="golem3" parent="." instance=ExtResource("17_r6kme")]
+position = Vector2(400, -4)
+
+[node name="golem4" parent="." instance=ExtResource("17_r6kme")]
+position = Vector2(740, -5)
+
+[node name="golem5" parent="." instance=ExtResource("17_r6kme")]
+position = Vector2(571, -94)
+
+[node name="golem2" parent="." instance=ExtResource("17_r6kme")]
+position = Vector2(400, -195)
+
+[node name="golem" parent="." instance=ExtResource("17_r6kme")]
+position = Vector2(739, -195)
