@@ -26,7 +26,7 @@ public partial class exit_portal : Area2D
 	public float portal_time = (float)0.5; 
 	public bool portal_entered = false;
 
-
+	public bool angle_set = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -34,12 +34,20 @@ public partial class exit_portal : Area2D
 		Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
 	}
 
+	public Vector2 give_vector(float new_x,float new_y)
+	{
+		PortalFollower follower = GetNodeOrNull<PortalFollower>($"../exit/follow");
+		return follower.calc_output(new_x,new_y);
+	}
 	private void OnBodyEntered(Node body)
 	{	
 
 		Player player = body.GetNodeOrNull<Player>($"../Player");
 		
 		entry_portal ep = GetNodeOrNull<entry_portal>($"../entry");
+
+		PortalFollower follower = GetNodeOrNull<PortalFollower>($"../exit/follow");
+
 		if (player != null)
 		{
 			if (ep != null)
@@ -52,7 +60,7 @@ public partial class exit_portal : Area2D
 						{
 							float new_x = ep.Get_x();
 							float new_y = ep.Get_y();
-							Vector2 current = new Vector2(new_x - 20, new_y);
+							Vector2 current = ep.give_vector(new_x,new_y);
 							player.Position = current;
 							portal_entered = true;
 						}
@@ -60,7 +68,7 @@ public partial class exit_portal : Area2D
 						{
 							float new_x = ep.Get_x();
 							float new_y = ep.Get_y();
-							Vector2 current = new Vector2(new_x + 20, new_y);
+							Vector2 current = ep.give_vector(new_x,new_y);
 							player.Position = current;
 							portal_entered = true;
 						}
@@ -89,6 +97,13 @@ public partial class exit_portal : Area2D
 
 		var player_sprite = player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		var fairy = player.GetNode<AnimatedSprite2D>("AnimatedSprite2D2");
+
+		var fairy_1 = fairy.GetNode<RayCast2D>("r1");
+		var fairy_2 = fairy.GetNode<RayCast2D>("r2");
+		var fairy_3 = fairy.GetNode<RayCast2D>("r3");
+		var fairy_4 = fairy.GetNode<RayCast2D>("r4");
+
+
 		
 		var rayRight = GetNode<RayCast2D>("RayRight");
 		var rayLeft = GetNode<RayCast2D>("RayLeft");
@@ -116,9 +131,8 @@ public partial class exit_portal : Area2D
 
 		if ((rayRight.IsColliding() || rayRight2.IsColliding()) && (rayLeft.IsColliding() || rayLeft2.IsColliding()))
 		{
-			if ((rayRight.GetCollider() == player || rayRight2.GetCollider() == player) && (rayLeft.GetCollider() == player || rayLeft2.GetCollider() == player))
+			if (rayRight.GetCollider() == player || rayRight2.GetCollider() == player || rayLeft.GetCollider() == player || rayLeft2.GetCollider() == player)
 			{
-				GD.Print("Something");
 			}
 			else if (fly_time <= 4)
 			{
@@ -167,7 +181,11 @@ public partial class exit_portal : Area2D
 			direction = 0;
 			right_stop = true;
 			is_shot = false;
-			Rotation = follower.calc_angle();
+			if (!angle_set)
+			{
+				Rotation = follower.calc_angle();
+				angle_set = true;
+			}
 			
 		}
 		else if (rayUp.IsColliding() && rayUp.GetCollider() != GetParent().GetNode<Player>("Player"))
@@ -175,7 +193,11 @@ public partial class exit_portal : Area2D
 			direction = 0;
 			right_stop = false;
 			is_shot = false;
-			Rotation = - follower.calc_angle();
+			if (!angle_set)
+			{
+				Rotation = -follower.calc_angle();
+				angle_set = true;
+			}
 		}
 
 		if (rightDist.IsColliding() && !leftDist.IsColliding() && rightDist.GetCollider() != GetParent().GetNode<Player>("Player"))
@@ -184,7 +206,11 @@ public partial class exit_portal : Area2D
 			right_stop = true;
 			
 			
-			Rotation = follower.calc_angle();
+			if (!angle_set)
+			{
+				Rotation = follower.calc_angle();
+				angle_set = true;
+			}
 		
 			
 			
@@ -193,7 +219,11 @@ public partial class exit_portal : Area2D
 		else if (!rightDist.IsColliding() && leftDist.IsColliding() && leftDist.GetCollider() != GetParent().GetNode<Player>("Player"))
 		{
 			
-			Rotation = follower.calc_angle();
+			if (!angle_set)
+			{
+				Rotation = follower.calc_angle();
+				angle_set = true;
+			}
 	
 			
 			right_stop = false;
@@ -211,9 +241,11 @@ public partial class exit_portal : Area2D
 			
 			
 			last_known_new_pos = UpdatePosition(fairy.GlobalPosition,mouse_click_pos,100,(float)delta);
-			
-			
-			be_shot_mouse(delta);
+
+			if (!fairy_1.IsColliding() && !fairy_2.IsColliding() && !fairy_3.IsColliding() && !fairy_4.IsColliding())
+			{
+				be_shot_mouse(delta);
+			}
 			fly_time = 0;
 		}
 		
@@ -262,7 +294,8 @@ public partial class exit_portal : Area2D
 
 		Vector2 mousePosition = GetGlobalMousePosition();
 
-
+		
+		angle_set = false;
 		
 		if (mousePosition.X <= player.Position.X - 30)
 		{

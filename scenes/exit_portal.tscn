@@ -76,7 +76,7 @@ shape = SubResource("CapsuleShape2D_am43k")
 
 [node name="RayRight" type="RayCast2D" parent="."]
 position = Vector2(0, -7)
-target_position = Vector2(8, 0)
+target_position = Vector2(12, 0)
 
 [node name="RightDistance" type="RayCast2D" parent="."]
 position = Vector2(0, -1)
@@ -88,7 +88,7 @@ target_position = Vector2(-18, 0)
 
 [node name="RayRight2" type="RayCast2D" parent="."]
 position = Vector2(0, 7)
-target_position = Vector2(8, 0)
+target_position = Vector2(12, 0)
 
 [node name="RayUp" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
@@ -99,9 +99,9 @@ position = Vector2(1, 5)
 target_position = Vector2(0, 10)
 
 [node name="RayLeft" type="RayCast2D" parent="."]
-position = Vector2(1, 7)
-target_position = Vector2(-8, 0)
+position = Vector2(0, 7)
+target_position = Vector2(-12, 0)
 
 [node name="RayLeft2" type="RayCast2D" parent="."]
 position = Vector2(0, -7)
-target_position = Vector2(-8, 0)
+target_position = Vector2(-12, 0)
