@@ -11,5 +11,13 @@ public partial class game_over : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (Input.IsActionJustPressed("attack"))
+		{
+			GetTree().ChangeSceneToFile("res://scenes/level_1.tscn");
+
+			GlobalVariables globalVars = GlobalVariables.GetInstance();
+			globalVars.ResetVariables();
+
+		}
 	}
 }
