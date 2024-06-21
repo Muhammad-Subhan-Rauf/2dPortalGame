@@ -8,9 +8,9 @@ public partial class enemy : Area2D
 	float Speed = 60f;
 	float Passive_speed = 30f;
 	public override void _Ready()
-    {       
+	{       
 		Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
-    }
+	}
 	private void OnBodyEntered(Node body)
 	{
 		Player player = GetNode<Player>($"../Player");
@@ -37,39 +37,39 @@ public partial class enemy : Area2D
 		Player player = GetNode<Player>($"../Player");
 
 		if (right.IsColliding())
-        {
-            var collider = right.GetCollider();
-            if (collider is Player)
-            {
-                MoveTowardsPlayerOnXAxis((float)delta, player);
+		{
+			var collider = right.GetCollider();
+			if (collider is Player)
+			{
+				MoveTowardsPlayerOnXAxis((float)delta, player);
 				sprite.Play("run");
 				sprite.FlipH = false;
-            }
+			}
 			else
 			{
 				sprite.Play("idle");
 				passive_mode((float)delta);
 				
 			}
-        }
+		}
 		
 
 		if (left.IsColliding())
-        {
-            var collider = left.GetCollider();
+		{
+			var collider = left.GetCollider();
 
-            if (collider is Player)
-            {
-                MoveTowardsPlayerOnXAxis((float)delta, player);
+			if (collider is Player)
+			{
+				MoveTowardsPlayerOnXAxis((float)delta, player);
 				sprite.Play("run");
 				sprite.FlipH = true;
-            }
+			}
 			else
 			{
 				sprite.Play("idle");
 				passive_mode((float)delta);
 			}
-        }
+		}
 
 		if (!left.IsColliding() && !right.IsColliding())
 		{
@@ -110,14 +110,14 @@ public partial class enemy : Area2D
 		}
 	}
 	private void MoveTowardsPlayerOnXAxis(float delta, Player player)
-    {
-        // Calculate the direction vector from the current position to the player's position
-        float directionX = player.GlobalPosition.X - GlobalPosition.X;
-        
-        // Normalize the direction to get a unit vector
-        directionX = directionX > 0 ? 1 : -1;
+	{
+		// Calculate the direction vector from the current position to the player's position
+		float directionX = player.GlobalPosition.X - GlobalPosition.X;
+		
+		// Normalize the direction to get a unit vector
+		directionX = directionX > 0 ? 1 : -1;
 
-        // Move the object towards the player only on the x-axis
-        GlobalPosition += new Vector2(directionX * Speed * delta, 0);
-    }
+		// Move the object towards the player only on the x-axis
+		GlobalPosition += new Vector2(directionX * Speed * delta, 0);
+	}
 }

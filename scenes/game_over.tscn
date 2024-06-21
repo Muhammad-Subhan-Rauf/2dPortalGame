@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcvk0mjlaheh2"]
+
+[ext_resource type="FontFile" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_lubbc"]
+[ext_resource type="FontFile" path="res://assets/fonts/PixelOperator8.ttf" id="1_nqxqd"]
+
+[node name="Game_over" type="Node2D"]
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 93.0
+offset_top = 299.0
+offset_right = 1085.0
+offset_bottom = 523.0
+theme_override_fonts/font = ExtResource("1_lubbc")
+theme_override_font_sizes/font_size = 64
+text = "Press space to restart
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="."]
+offset_left = 70.0
+offset_top = 67.0
+offset_right = 1062.0
+offset_bottom = 291.0
+theme_override_colors/font_color = Color(0.494118, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_nqxqd")
+theme_override_font_sizes/font_size = 128
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
