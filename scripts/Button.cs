@@ -25,9 +25,9 @@ public partial class Button : Area2D
 	{
 		var overlappingAreas = GetOverlappingAreas();
 
-        var overlappingBodies = GetOverlappingBodies();
+		var overlappingBodies = GetOverlappingBodies();
 
-        if (overlappingAreas.Count == 0 && overlappingBodies.Count == 0)
+		if (overlappingAreas.Count == 0 && overlappingBodies.Count == 0)
 		{
 			var enable = GetNode<Sprite2D>("enable");
 			var disable = GetNode<Sprite2D>("disable");	

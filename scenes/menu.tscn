@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqawxetwjg4nq"]
+
+[ext_resource type="Texture2D" uid="uid://bpvaex8jp5p2n" path="res://assets/wallpapersden.com_into-the-portal_1920x1080.jpg" id="1_78unx"]
+[ext_resource type="FontFile" uid="uid://4givts15ktsb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_jls8b"]
+[ext_resource type="Texture2D" uid="uid://b246b8tq1ertk" path="res://assets/Default@2x.png" id="2_se2ye"]
+[ext_resource type="Texture2D" uid="uid://bahmawtpv4v6s" path="res://assets/Hover@2x.png" id="3_fmri8"]
+[ext_resource type="Script" path="res://scripts/TextureButton.cs" id="4_s6gdn"]
+
+[node name="menu" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576.444, 324)
+scale = Vector2(0.599421, 0.6)
+texture = ExtResource("1_78unx")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 450.0
+offset_top = 353.0
+offset_right = 770.0
+offset_bottom = 519.0
+texture_normal = ExtResource("2_se2ye")
+texture_hover = ExtResource("3_fmri8")
+script = ExtResource("4_s6gdn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 194.0
+offset_top = 66.0
+offset_right = 1042.0
+offset_bottom = 155.0
+theme_override_colors/font_color = Color(0.654902, 0.662745, 0.411765, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 30
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_jls8b")
+theme_override_font_sizes/font_size = 64
+text = "PORTAL PURSUIT"
+horizontal_alignment = 1
+vertical_alignment = 1
