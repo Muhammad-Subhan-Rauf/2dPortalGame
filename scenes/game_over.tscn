@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcvk0mjlaheh2"]
+[gd_scene load_steps=5 format=3 uid="uid://dcvk0mjlaheh2"]
 
 [ext_resource type="Script" path="res://scripts/game_over.cs" id="1_cw706"]
-[ext_resource type="FontFile" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_lubbc"]
-[ext_resource type="FontFile" path="res://assets/fonts/PixelOperator8.ttf" id="1_nqxqd"]
+[ext_resource type="FontFile" uid="uid://4givts15ktsb" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_lubbc"]
+[ext_resource type="FontFile" uid="uid://dv6x8yxqmvyac" path="res://assets/fonts/PixelOperator8.ttf" id="1_nqxqd"]
+[ext_resource type="Texture2D" uid="uid://beictsugwqeqa" path="res://assets/sprites/dark_cloud.png" id="4_4nwcp"]
 
 [node name="Game_over" type="Node2D"]
 script = ExtResource("1_cw706")
@@ -31,3 +32,9 @@ theme_override_font_sizes/font_size = 128
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(581.25, 322)
+scale = Vector2(2.00955, 1.98765)
+texture = ExtResource("4_4nwcp")

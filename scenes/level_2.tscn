@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dxtyg7w2x1s28"]
+[gd_scene load_steps=67 format=3 uid="uid://dxtyg7w2x1s28"]
 
 [ext_resource type="PackedScene" uid="uid://b2owsl1brrein" path="res://scenes/tilemap.tscn" id="1_1nmqt"]
 [ext_resource type="Script" path="res://scripts/Button.cs" id="1_65vfp"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cyh7kak67yqg5" path="res://scenes/game_manager.tscn" id="2_3l4y1"]
 [ext_resource type="Script" path="res://scripts/GlobalVariables.cs" id="2_2783a"]
 [ext_resource type="FontFile" uid="uid://bi7tpmnk4jiad" path="res://assets/fonts/joystix monospace.otf" id="2_no6iv"]
-[ext_resource type="PackedScene" uid="uid://cc8npgcgjlm2k" path="res://scenes/Player.tscn" id="3_srhrn"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="3_srhrn"]
 [ext_resource type="PackedScene" uid="uid://7oigscdgx82s" path="res://scenes/entry_portal.tscn" id="4_66mj3"]
 [ext_resource type="PackedScene" uid="uid://doiuqumpjehlv" path="res://scenes/PortalFollower.tscn" id="5_sk33c"]
 [ext_resource type="PackedScene" uid="uid://cb7dbv5hy6xbg" path="res://scenes/exit_portal.tscn" id="6_4rnai"]
@@ -20,6 +20,8 @@
 [ext_resource type="Script" path="res://scripts/key.cs" id="13_kcn7e"]
 [ext_resource type="Texture2D" uid="uid://b6hiaxbyqyc32" path="res://assets/key.png" id="14_ddtnd"]
 [ext_resource type="PackedScene" uid="uid://b6eke774tpf6p" path="res://scenes/golem.tscn" id="17_r6kme"]
+[ext_resource type="Texture2D" uid="uid://c53arpamw38pm" path="res://assets/sprites/Clouds 4/1.png" id="21_vnb4d"]
+[ext_resource type="Texture2D" uid="uid://bqtsjfmwfrglv" path="res://assets/sprites/Clouds 4/3.png" id="22_pit2e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hyiw4"]
 size = Vector2(12, 6)
@@ -334,6 +336,7 @@ script = ExtResource("2_2783a")
 [node name="GameManager" parent="." instance=ExtResource("2_3l4y1")]
 
 [node name="Block_pick3" type="Label" parent="GameManager"]
+z_index = -3
 texture_filter = 1
 offset_left = 490.0
 offset_top = -268.0
@@ -347,6 +350,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Block_pick2" type="Label" parent="GameManager"]
+z_index = -3
 texture_filter = 1
 offset_left = 173.0
 offset_top = -110.0
@@ -359,6 +363,7 @@ text = "how good is your aim???"
 autowrap_mode = 2
 
 [node name="Block_pick" type="Label" parent="GameManager"]
+z_index = -3
 texture_filter = 1
 offset_left = -111.0
 offset_top = -82.0
@@ -527,3 +532,12 @@ position = Vector2(399, -189)
 
 [node name="golem" parent="." instance=ExtResource("17_r6kme")]
 position = Vector2(739, -195)
+
+[node name="back" type="Sprite2D" parent="."]
+z_index = -6
+position = Vector2(383, -274.25)
+scale = Vector2(2.50868, 2.38117)
+texture = ExtResource("21_vnb4d")
+
+[node name="Sprite2D" type="Sprite2D" parent="back"]
+texture = ExtResource("22_pit2e")

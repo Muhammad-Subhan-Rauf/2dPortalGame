@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://0uhc47l7wiqi"]
+[gd_scene load_steps=62 format=3 uid="uid://0uhc47l7wiqi"]
 
 [ext_resource type="Script" path="res://scripts/level_1.cs" id="1_bm3as"]
 [ext_resource type="PackedScene" uid="uid://b2owsl1brrein" path="res://scenes/tilemap.tscn" id="1_l6wh1"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" path="res://scripts/door.cs" id="9_d1ly0"]
 [ext_resource type="Texture2D" uid="uid://b6hiaxbyqyc32" path="res://assets/key.png" id="9_pea6n"]
 [ext_resource type="Script" path="res://scripts/key.cs" id="11_sbxy7"]
+[ext_resource type="Texture2D" uid="uid://dulesrh7qd0jq" path="res://assets/sprites/Clouds 8/1.png" id="16_asuqc"]
+[ext_resource type="Texture2D" uid="uid://bxsgibmn3tolg" path="res://assets/sprites/Clouds 8/2.png" id="17_pmpfl"]
+[ext_resource type="Texture2D" uid="uid://266uyvtmq3xf" path="res://assets/sprites/Clouds 8/4.png" id="18_udk7j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vjfbw"]
 radius = 9.0
@@ -457,3 +460,15 @@ scale = Vector2(0.46875, 0.46875)
 sprite_frames = SubResource("SpriteFrames_luucc")
 autoplay = "default"
 frame_progress = 0.434879
+
+[node name="back" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(266, -10)
+scale = Vector2(2.15278, 1.34331)
+texture = ExtResource("16_asuqc")
+
+[node name="Sprite2D" type="Sprite2D" parent="back"]
+texture = ExtResource("17_pmpfl")
+
+[node name="floaty clouds" type="Sprite2D" parent="back"]
+texture = ExtResource("18_udk7j")
