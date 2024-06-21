@@ -1,8 +1,9 @@
-[gd_scene load_steps=63 format=3 uid="uid://dxtyg7w2x1s28"]
+[gd_scene load_steps=64 format=3 uid="uid://dxtyg7w2x1s28"]
 
 [ext_resource type="PackedScene" uid="uid://b2owsl1brrein" path="res://scenes/tilemap.tscn" id="1_1nmqt"]
 [ext_resource type="Script" path="res://scripts/Button.cs" id="1_65vfp"]
 [ext_resource type="Script" path="res://scripts/level_2.cs" id="1_r6syr"]
+[ext_resource type="PackedScene" uid="uid://cyh7kak67yqg5" path="res://scenes/game_manager.tscn" id="2_3l4y1"]
 [ext_resource type="FontFile" uid="uid://bi7tpmnk4jiad" path="res://assets/fonts/joystix monospace.otf" id="2_no6iv"]
 [ext_resource type="PackedScene" uid="uid://cc8npgcgjlm2k" path="res://scenes/Player.tscn" id="3_srhrn"]
 [ext_resource type="PackedScene" uid="uid://7oigscdgx82s" path="res://scenes/entry_portal.tscn" id="4_66mj3"]
@@ -326,18 +327,43 @@ animations = [{
 [node name="level_2" type="Node2D"]
 script = ExtResource("1_r6syr")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="GameManager" parent="." instance=ExtResource("2_3l4y1")]
+
+[node name="Block_pick3" type="Label" parent="GameManager"]
 texture_filter = 1
-texture_repeat = 3
-offset_left = -86.0
-offset_top = -75.0
-offset_right = 83.0
-offset_bottom = -27.0
-theme_override_colors/default_color = Color(0.730738, 2.75669e-05, 1.57869e-05, 1)
-theme_override_fonts/normal_font = ExtResource("2_no6iv")
-theme_override_font_sizes/normal_font_size = 13
+offset_left = 490.0
+offset_top = -268.0
+offset_right = 650.0
+offset_bottom = -239.0
+theme_override_colors/font_color = Color(0.054902, 0.027451, 0.105882, 1)
+theme_override_fonts/font = ExtResource("2_no6iv")
+theme_override_font_sizes/font_size = 8
+text = "Sure hope you didnt forget about the button"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Block_pick2" type="Label" parent="GameManager"]
+texture_filter = 1
+offset_left = 173.0
+offset_top = -110.0
+offset_right = 268.0
+offset_bottom = -81.0
+theme_override_colors/font_color = Color(0.054902, 0.027451, 0.105882, 1)
+theme_override_fonts/font = ExtResource("2_no6iv")
+theme_override_font_sizes/font_size = 8
+text = "how good is your aim???"
+autowrap_mode = 2
+
+[node name="Block_pick" type="Label" parent="GameManager"]
+texture_filter = 1
+offset_left = -111.0
+offset_top = -82.0
+offset_right = 101.0
+offset_bottom = -33.0
+theme_override_colors/font_color = Color(0.054902, 0.027451, 0.105882, 1)
+theme_override_fonts/font = ExtResource("2_no6iv")
 text = "Press G to pick up the Block"
-fit_content = true
+autowrap_mode = 2
 
 [node name="Button" type="Area2D" parent="."]
 position = Vector2(-18, 19)
@@ -402,7 +428,7 @@ frame = 11
 frame_progress = 1.0
 
 [node name="Player" parent="." instance=ExtResource("3_srhrn")]
-position = Vector2(46, 7)
+position = Vector2(36, -6)
 collision_mask = 2
 
 [node name="entry" parent="." instance=ExtResource("4_66mj3")]
@@ -418,7 +444,7 @@ position = Vector2(-309, 147)
 position = Vector2(34, -3)
 
 [node name="sword" parent="." instance=ExtResource("7_mf6xs")]
-position = Vector2(46, 10)
+position = Vector2(36, -3)
 scale = Vector2(0.7, 0.7)
 
 [node name="block_door" parent="." instance=ExtResource("11_mbkq4")]
@@ -493,7 +519,7 @@ position = Vector2(740, -5)
 position = Vector2(571, -94)
 
 [node name="golem2" parent="." instance=ExtResource("17_r6kme")]
-position = Vector2(400, -195)
+position = Vector2(399, -189)
 
 [node name="golem" parent="." instance=ExtResource("17_r6kme")]
 position = Vector2(739, -195)

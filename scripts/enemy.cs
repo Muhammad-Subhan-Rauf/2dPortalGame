@@ -13,7 +13,13 @@ public partial class enemy : Area2D
     }
 	private void OnBodyEntered(Node body)
 	{
-		GD.Print(body);
+		Player player = GetNode<Player>($"../Player");
+		if (body == player)
+		{
+			
+			player.loose_life();
+		}
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -22,12 +22,13 @@ public partial class Player : CharacterBody2D
 	public Vector2 reset_pos = new Vector2(0, 0);
 
 
+	public int lives = 5;
 	
-    public override void _Ready()
-    {       
-    }
+	public override void _Ready()
+	{       
+	}
 
-    public override void _PhysicsProcess(double delta)
+	public override void _PhysicsProcess(double delta)
 	
 	{
 
@@ -128,13 +129,22 @@ public partial class Player : CharacterBody2D
 	public Vector2 update_fairy(double delta, float distance, Vector2 player, Vector2 mousePos)
 	{
 	
-        Vector2 direction = (mousePos - player).Normalized();
+		Vector2 direction = (mousePos - player).Normalized();
 		
-        Vector2 newPosition = player + (direction * distance)  ;		
+		Vector2 newPosition = player + (direction * distance)  ;		
 
 		return newPosition;
 
 	}
+
+	public void loose_life()
+	{
+		var GM = GetNode<Node>($"../GameManager") as game_manager;
+		GM.loose_life();
+		lives -= 1;
+		GlobalPosition = reset_pos;
+	}
+	
 
 	
 }

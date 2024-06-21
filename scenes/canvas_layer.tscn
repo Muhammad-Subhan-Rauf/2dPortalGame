@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2omy6cydcs4s"]
+
+[ext_resource type="FontFile" uid="uid://dv6x8yxqmvyac" path="res://assets/fonts/PixelOperator8.ttf" id="1_x4kkm"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="score" type="Label" parent="."]
+texture_filter = 1
+offset_left = -170.0
+offset_top = -89.0
+offset_right = -152.0
+offset_bottom = -72.0
+theme_override_fonts/font = ExtResource("1_x4kkm")
+theme_override_font_sizes/font_size = 16
+text = "0
+"
+
+[node name="lives" type="Label" parent="."]
+texture_filter = 1
+offset_left = 156.0
+offset_top = -90.0
+offset_right = 170.0
+offset_bottom = -74.0
+theme_override_fonts/font = ExtResource("1_x4kkm")
+theme_override_font_sizes/font_size = 16
+text = "5"
