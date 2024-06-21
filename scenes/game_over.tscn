@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcvk0mjlaheh2"]
+[gd_scene load_steps=4 format=3 uid="uid://dcvk0mjlaheh2"]
 
+[ext_resource type="Script" path="res://scripts/game_over.cs" id="1_cw706"]
 [ext_resource type="FontFile" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_lubbc"]
 [ext_resource type="FontFile" path="res://assets/fonts/PixelOperator8.ttf" id="1_nqxqd"]
 
 [node name="Game_over" type="Node2D"]
+script = ExtResource("1_cw706")
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 93.0

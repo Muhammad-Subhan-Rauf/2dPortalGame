@@ -156,6 +156,10 @@ public partial class Player : CharacterBody2D
 
 		GlobalPosition = reset_pos;
 		dead = true;
+		if (globalVars.lives <= 0)
+		{
+			GetTree().ChangeSceneToFile("res://scenes/Game_over.tscn");
+		}
 	}
 
 	public void update_HUD()
