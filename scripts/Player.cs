@@ -23,6 +23,7 @@ public partial class Player : CharacterBody2D
 
 
 	public int lives = 5;
+	public int score = 0;
 	
 	public override void _Ready()
 	{       
@@ -142,7 +143,18 @@ public partial class Player : CharacterBody2D
 		var GM = GetNode<Node>($"../GameManager") as game_manager;
 		GM.loose_life();
 		lives -= 1;
+		score -= 40;
 		GlobalPosition = reset_pos;
+	}
+
+	public void update_HUD()
+	{
+		var canvas = GetNode<CanvasLayer>("CanvasLayer");
+		var life_label = canvas.GetNode<Label>("lives");
+		var score_label = canvas.GetNode<Label>("score");
+
+		life_label.Text = lives.ToString();
+		score_label.Text = score.ToString();
 	}
 	
 

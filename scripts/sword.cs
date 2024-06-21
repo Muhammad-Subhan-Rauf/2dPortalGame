@@ -23,8 +23,11 @@ public partial class sword : Area2D
 	private void OnBodyEntered(Node body)
 	{
 		var GM = GetNode<Node>($"../GameManager") as game_manager;
+		Player player = GetNode<Player>($"../Player");
+
 		if (body.GetType().Name == "enemy")
 		{
+			player.score += 100;
 			GM.add_score(100);
 			body.QueueFree();
 		}
