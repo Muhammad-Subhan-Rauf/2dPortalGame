@@ -30,7 +30,10 @@ public partial class sword : Area2D
 			player.score += 100;
 			GM.add_score(100);
 			body.QueueFree();
+			
 		}
+		player.update_HUD();
+		
 	}
 	
 

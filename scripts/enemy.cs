@@ -18,6 +18,7 @@ public partial class enemy : Area2D
 		{
 			
 			player.loose_life();
+			player.update_HUD();
 		}
 		
 	}

@@ -273,6 +273,8 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 
+[node name="CanvasLayer" parent="Camera2D" instance=ExtResource("4_avia3")]
+
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(19, 0)
@@ -294,5 +296,3 @@ target_position = Vector2(0, 200)
 
 [node name="r4" type="RayCast2D" parent="AnimatedSprite2D2"]
 target_position = Vector2(200, 0)
-
-[node name="CanvasLayer" parent="." instance=ExtResource("4_avia3")]

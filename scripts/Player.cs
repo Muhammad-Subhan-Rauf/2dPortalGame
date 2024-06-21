@@ -148,8 +148,9 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void update_HUD()
-	{
-		var canvas = GetNode<CanvasLayer>("CanvasLayer");
+	{	
+		var cam = GetNode<Camera2D>("Camera2D");
+		var canvas = cam.GetNode<CanvasLayer>("CanvasLayer");
 		var life_label = canvas.GetNode<Label>("lives");
 		var score_label = canvas.GetNode<Label>("score");
 
