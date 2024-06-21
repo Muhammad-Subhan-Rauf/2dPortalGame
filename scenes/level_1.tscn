@@ -1,8 +1,9 @@
-[gd_scene load_steps=58 format=3 uid="uid://0uhc47l7wiqi"]
+[gd_scene load_steps=59 format=3 uid="uid://0uhc47l7wiqi"]
 
 [ext_resource type="Script" path="res://scripts/level_1.cs" id="1_bm3as"]
 [ext_resource type="PackedScene" uid="uid://b2owsl1brrein" path="res://scenes/tilemap.tscn" id="1_l6wh1"]
 [ext_resource type="PackedScene" uid="uid://cyh7kak67yqg5" path="res://scenes/game_manager.tscn" id="2_4s6y8"]
+[ext_resource type="Script" path="res://scripts/GlobalVariables.cs" id="2_5cj5s"]
 [ext_resource type="PackedScene" uid="uid://cc8npgcgjlm2k" path="res://scenes/Player.tscn" id="2_obxfa"]
 [ext_resource type="FontFile" uid="uid://bi7tpmnk4jiad" path="res://assets/fonts/joystix monospace.otf" id="3_3xr7a"]
 [ext_resource type="PackedScene" uid="uid://7oigscdgx82s" path="res://scenes/entry_portal.tscn" id="3_opj51"]
@@ -318,6 +319,9 @@ animations = [{
 
 [node name="level_1" type="Node2D"]
 script = ExtResource("1_bm3as")
+
+[node name="GlobalVariables" type="Node2D" parent="."]
+script = ExtResource("2_5cj5s")
 
 [node name="GameManager" parent="." instance=ExtResource("2_4s6y8")]
 

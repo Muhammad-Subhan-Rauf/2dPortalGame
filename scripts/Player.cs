@@ -140,22 +140,33 @@ public partial class Player : CharacterBody2D
 
 	public void loose_life()
 	{
+		GlobalVariables globalVars = GlobalVariables.GetInstance();
+
 		var GM = GetNode<Node>($"../GameManager") as game_manager;
 		GM.loose_life();
-		lives -= 1;
-		score -= 40;
+		
+
+		globalVars.lives -= 1;
+		globalVars.score -= 40;
+		lives = globalVars.lives;
+		score = globalVars.score;
+
+
 		GlobalPosition = reset_pos;
+		GetTree().ReloadCurrentScene();
 	}
 
 	public void update_HUD()
 	{	
+		GlobalVariables globalVars = GlobalVariables.GetInstance();
+
 		var cam = GetNode<Camera2D>("Camera2D");
 		var canvas = cam.GetNode<CanvasLayer>("CanvasLayer");
 		var life_label = canvas.GetNode<Label>("lives");
 		var score_label = canvas.GetNode<Label>("score");
 
-		life_label.Text = lives.ToString();
-		score_label.Text = score.ToString();
+		life_label.Text = globalVars.lives.ToString();
+		score_label.Text = globalVars.score.ToString();
 	}
 	
 
