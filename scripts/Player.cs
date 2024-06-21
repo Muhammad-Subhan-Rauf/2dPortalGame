@@ -24,6 +24,8 @@ public partial class Player : CharacterBody2D
 
 	public int lives = 5;
 	public int score = 0;
+
+	public bool dead = false;
 	
 	public override void _Ready()
 	{       
@@ -153,7 +155,7 @@ public partial class Player : CharacterBody2D
 
 
 		GlobalPosition = reset_pos;
-		GetTree().ReloadCurrentScene();
+		dead = true;
 	}
 
 	public void update_HUD()

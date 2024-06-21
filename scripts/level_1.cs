@@ -17,6 +17,14 @@ public partial class level_1 : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
+		Player player = GetNode<Player>("Player");
+		player.update_HUD();
+
+		if (player.dead == true)
+		{
+			GetTree().ReloadCurrentScene();
+		}
 		var door = GetNode<Area2D>("door") as door;
 		var door_collider = door.GetNode<CollisionShape2D>("CollisionShape2D");
 		var kkey = GetNodeOrNull<Area2D>("key") as key;

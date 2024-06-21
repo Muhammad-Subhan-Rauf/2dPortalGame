@@ -11,6 +11,7 @@ public partial class level_2 : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,7 +19,13 @@ public partial class level_2 : Node2D
 	{
 		door_functions();
 		door_and_key();
+		Player player = GetNode<Player>($"Player");
+		player.update_HUD();
 
+		if (player.dead == true)
+		{
+			GetTree().ReloadCurrentScene();
+		}
 
 	}
 	public void door_and_key()
