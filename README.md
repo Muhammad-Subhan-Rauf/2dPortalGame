@@ -3,7 +3,7 @@
 
 Wanted to add alot more things to the game but could not because I was in the hospital for 2 days (eid day and the day before eid) because of a heatstroke.
 
-Here is how you play the game and have fun:
+Here is how you play the game:
 
 Move around using W A D (W to jump and A D to move left and right respectively)
 
